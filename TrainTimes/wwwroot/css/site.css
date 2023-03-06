@@ -1,0 +1,27 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.transformOrange {
+    color: #EC671B;
+}
+
+.bg-transform {
+    --bs-bg-opacity: 1;
+    background-color: #EC671B !important;
+}

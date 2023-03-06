@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTimes", "TrainTimes\TrainTimes.csproj", "{D6213690-AC86-4741-B7AD-B4B1434E2ECB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTimesTests", "TrainTimesTests\TrainTimesTests.csproj", "{791E9328-7F10-4296-B1B2-15CCC31C0E31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6213690-AC86-4741-B7AD-B4B1434E2ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6213690-AC86-4741-B7AD-B4B1434E2ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6213690-AC86-4741-B7AD-B4B1434E2ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6213690-AC86-4741-B7AD-B4B1434E2ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{791E9328-7F10-4296-B1B2-15CCC31C0E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791E9328-7F10-4296-B1B2-15CCC31C0E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791E9328-7F10-4296-B1B2-15CCC31C0E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791E9328-7F10-4296-B1B2-15CCC31C0E31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7622511-1FA4-4D9C-A8DF-F472020C9E3C}
+	EndGlobalSection
+EndGlobal
