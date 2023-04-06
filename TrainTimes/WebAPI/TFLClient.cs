@@ -73,6 +73,41 @@ namespace TrainTimes.WebAPI
             }
             return arrivals;
         }
+
+        public async Task<Dictionary<string, List<StationArrival>>> GetStationPlatformArrivals(string stationName)
+        {
+            List<StationArrival> arrivals = new List<StationArrival>();
+            Dictionary<string, List<StationArrival>> platformArrivals = new Dictionary<string, List<StationArrival>>();
+            string stationID = await GetStationID(stationName);
+            try
+            {
+                string requestParams = @"StopPoint/" + stationID + @"/Arrivals?mode=tube";
+                HttpResponseMessage response = await Client.GetAsync(requestParams);
+                arrivals = JsonConvert.DeserializeObject<List<StationArrival>>(response.Content.ReadAsStringAsync().Result);
+
+                foreach (StationArrival _arrival in arrivals)
+                {
+                    if (!platformArrivals.ContainsKey(_arrival.platformName))
+                    {
+                        List<StationArrival> stationArrivals = new List<StationArrival>();
+                        stationArrivals = arrivals.Where(a => a.platformName == _arrival.platformName).ToList();
+
+                        platformArrivals.Add(_arrival.platformName, stationArrivals);
+                    }
+                    else
+                    {
+                        List<StationArrival> stationArrivals = platformArrivals[_arrival.platformName];
+                        stationArrivals.Add(_arrival);
+                        platformArrivals[_arrival.platformName] = stationArrivals;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return platformArrivals;
+        }
     }
 }
 

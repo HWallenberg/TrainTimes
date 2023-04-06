@@ -1,11 +1,11 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Great Portland Street Arrivals";
+    ViewData["Title"] = @Model.stationName + " Arrivals";
 }
 
 <div class="text-center">
-    <h1 class="display-4 transformOrange">Great Portland Street Arrivals</h1>
+    <h1 class="display-4 transformOrange">@Model.stationName Arrivals</h1>
 </div>
 
 <br />
@@ -14,90 +14,54 @@
 <div class="row justify-content-center">
     <table class="table table-reponsive">
         <tr class="transformOrange text-center size">
-            <th class="col-2"><h4>Platform 1</h4></th>
-            <th class="col-2"><h4>Platform 2</h4></th>
+            @foreach(var platformName in Model.platformNames)
+            {
+                <th class="col-2"><h4>@platformName</h4></th>
+            }
         </tr>
 
         <tr>
-            <td>
-                @foreach (var arrival in Model.platform1Arrivals)
-                {
-                <div class="container bg-light">
-                    <div class="col-auto">
-                        <table class="table table-reponsive">
-                            <tr>
-                                <td>
-                                    Next Arrival Time:
-                                </td>
-                                <td>
-                                    @arrival.expectedArrival.ToString("HH:mm:ss")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Line:
-                                </td>
-                                <td>
-                                    @arrival.lineName
-                                </td>
-                            </tr>
-                           
-                            <tr>
-                                <td>
-                                    Heading towards:
-                                </td>
-                                <td style="width:65%">
-                                    @arrival.towards
-                                </td>
-                            </tr>
-                        </table>
-                    
-                    </div>
-                </div>
-                <br />
-                }
-            </td>
-
-           
-
-            <td>
-                @foreach (var arrival in Model.platform2Arrivals)
-                {
-                    <div class="container bg-light">
-                        <div class="col-auto">
-                            <table class="table table-reponsive">
-                                <tr>
-                                    <td>
-                                        Next Arrival Time:
-                                    </td>
-                                    <td>
+            @foreach(var platformName in Model.platformNames)
+            {
+                <td>
+                    @foreach (var arrival in Model.platformsArrivals[platformName].Take(4).ToList())
+                    {
+                        <div class="container bg-light">
+                            <div class="col-auto">
+                                <table class="table table-reponsive">
+                                    <tr>
+                                        <td>
+                                            Next Arrival Time:
+                                        </td>
+                                        <td>
                                             @arrival.expectedArrival.ToString("HH:mm:ss")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Line:
-                                    </td>
-                                    <td>
-                                        @arrival.lineName
-                                    </td>
-                                </tr>
-                               
-                                <tr>
-                                    <td>
-                                        Heading towards:
-                                    </td>
-                                    <td style="width: 65%">
-                                        @arrival.towards
-                                    </td>
-                                </tr>
-                            </table>
-
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Line:
+                                        </td>
+                                        <td>
+                                            @arrival.lineName
+                                        </td>
+                                    </tr>
+                           
+                                    <tr>
+                                        <td>
+                                            Heading towards:
+                                        </td>
+                                        <td style="width:65%">
+                                            @arrival.towards
+                                        </td>
+                                    </tr>
+                                </table>
+                    
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                }
-            </td>
+                        <br />
+                    }
+                </td>
+            }
         </tr>
     </table>
 </div>

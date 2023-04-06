@@ -49,5 +49,17 @@ namespace TrainTimesTests
             Assert.AreEqual("940GZZLUGPS", arrivals[0].naptanId);
         }
 
+        [TestMethod]
+        public async Task GetOxfordCirusArrivals()
+        {
+            List<StationArrival> arrivals = new List<StationArrival>();
+            string stationName = "Oxford";
+            string stationID = string.Empty;
+            stationID = await this.client.GetStationID(stationName);
+            arrivals = await this.client.GetStationArrivals(stationID);
+            //Assert.IsTrue(arrivals.Count > 0);
+            //Assert.AreEqual("940GZZLUGPS", arrivals[0].naptanId);
+        }
+
     }
 }

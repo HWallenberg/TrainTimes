@@ -8,8 +8,9 @@ namespace TrainTimes.Pages
 {
     public class IndexModel : PageModel
     {
-        public List<StationArrival> platform1Arrivals {get; set;}
-        public List<StationArrival> platform2Arrivals { get; set; }
+        public Dictionary<string, List<StationArrival>> platformsArrivals { get; set; }
+        public List<string> platformNames { get; set; }
+        public string stationName { get; set; }
         private NextTrains _nextTrains { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
@@ -23,8 +24,9 @@ namespace TrainTimes.Pages
 
         public async Task OnGet()
         {
-            this.platform1Arrivals = await _nextTrains.GetPortlandStreetPlatformsArrivals(4, "Westbound - Platform 1");
-            this.platform2Arrivals = await _nextTrains.GetPortlandStreetPlatformsArrivals(4, "Eastbound - Platform 2");
+            this.platformsArrivals = await _nextTrains.GetPlatformsArrivals();
+            this.platformNames = platformsArrivals.Keys.ToList();
+            this.stationName = platformsArrivals[platformNames[0]].First().stationName;
         }
 
         

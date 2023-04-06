@@ -13,39 +13,19 @@ namespace TrainTimes.Logic
             client = new TFLClient(@"https://api.tfl.gov.uk");
         }
 
-        public async Task<List<StationArrival>> GetAllPortlandStreetArrivals()
+        public async Task<Dictionary<string, List<StationArrival>>> GetPlatformsArrivals()
         {
             try
-            {
-                List<StationArrival> arrivals = new List<StationArrival>();
-                string stationID = await client.GetStationID("GreatPortland");
-                arrivals = await client.GetStationArrivals(stationID);
-                return arrivals.OrderBy(a => a.timeToStation).ToList();
+            {   
+                Dictionary<string, List<StationArrival>> platformsArrivals = new Dictionary<string, List<StationArrival>>();
+                platformsArrivals = await client.GetStationPlatformArrivals("portland");
+                return platformsArrivals;   
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<List<StationArrival>> GetPortlandStreetPlatformsArrivals(int numberOfArrivals, string platformName)
-        {
-            try
-            {
-                if (numberOfArrivals > 0)
-                {
-                    List<StationArrival> arrivals = new List<StationArrival>();
-                    arrivals = await GetAllPortlandStreetArrivals();
-                    return arrivals.Where(a => a.platformName == platformName).Select(a => a).Take(numberOfArrivals).ToList();
-                }
-                else
-                {
-                    throw new Exception("Number of arrivals must be more than zero.");
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+
     }
 }
