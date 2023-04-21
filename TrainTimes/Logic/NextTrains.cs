@@ -18,7 +18,7 @@ namespace TrainTimes.Logic
             try
             {   
                 Dictionary<string, List<StationArrival>> platformsArrivals = new Dictionary<string, List<StationArrival>>();
-                platformsArrivals = await client.GetStationPlatformArrivals("portland");
+                platformsArrivals = await client.GetStationPlatformArrivals("piccadilly");
                 return platformsArrivals;   
             }
             catch (Exception ex)
