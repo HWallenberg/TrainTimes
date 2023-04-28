@@ -5,20 +5,20 @@ using TrainTimes.WebAPI;
 
 namespace TrainTimes.Logic
 {
-    public class NextTrains
+    public class StationArrivals
     {
         private TFLClient client { get; set; }
-        public NextTrains() 
+        public StationArrivals() 
         {
             client = new TFLClient(@"https://api.tfl.gov.uk");
         }
 
-        public async Task<Dictionary<string, List<StationArrival>>> GetPlatformsArrivals()
+        public async Task<Dictionary<string, List<StationArrival>>> GetPlatformsArrivals(string stationName)
         {
             try
             {   
                 Dictionary<string, List<StationArrival>> platformsArrivals = new Dictionary<string, List<StationArrival>>();
-                platformsArrivals = await client.GetStationPlatformArrivals("piccadilly");
+                platformsArrivals = await client.GetStationPlatformArrivals(stationName);
                 return platformsArrivals;   
             }
             catch (Exception ex)

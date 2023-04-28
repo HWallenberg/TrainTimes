@@ -24,7 +24,7 @@
             @foreach(var platformName in Model.platformNames)
             {
                 <td>
-                    @foreach (var arrival in Model.platformsArrivals[platformName].Take(4).ToList())
+                    @foreach (var arrival in Model.allPlatformArrivals[platformName].Take(4).ToList())
                     {
                         <div class="container bg-light">
                             <div class="col-auto">
