@@ -26,7 +26,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Unit Test
-        run: dotnet test ./TrainTimesTests/TrainTimesTests.csproj --no-build --verbosity normal
+        run: dotnet test ./TrainTimesTests/TrainTimesTests.csproj --verbosity normal
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
