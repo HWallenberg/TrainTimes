@@ -31,7 +31,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          trx_files: "./src/TrainTimesTests/TestResults/TTTests.trx"
+          trx_files: "/home/runner/work/TrainTimes/TrainTimes/TrainTimesTests/TestResults/TTTests.trx"
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
