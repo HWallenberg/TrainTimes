@@ -27,7 +27,7 @@ jobs:
       - name: Unit Test
         run: dotnet test ./TrainTimesTests/TrainTimesTests.csproj --verbosity normal --logger "trx;LogFileName=TTTests.trx"
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
           trx_files: "**/src/TrainTimesTests/TestResults/TTTests.trx"
