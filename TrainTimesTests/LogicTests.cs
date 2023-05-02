@@ -32,16 +32,5 @@ namespace TrainTimesTests
             Assert.AreEqual("940GZZLUOXC", arrivals["Southbound - Platform 3"][0].naptanId);
         }
 
-        [TestMethod]
-        public async Task GetAllOxfordStreetArrivals_FAILTEST()
-        {
-            Dictionary<string, List<StationArrival>> arrivals = new Dictionary<string, List<StationArrival>>();
-            StationArrivals nt = new StationArrivals();
-            arrivals = await nt.GetPlatformsArrivals("oxford");
-            Assert.IsTrue(arrivals.Count > 0);
-            Assert.IsTrue(arrivals.ContainsKey("Southbound - Platform 3"));
-            Assert.AreEqual("940GZZLUPCC", arrivals["Southbound - Platform 3"][0].naptanId);
-        }
-
     }
 }
