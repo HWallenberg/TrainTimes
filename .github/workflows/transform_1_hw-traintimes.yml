@@ -11,7 +11,8 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    #runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -27,10 +28,10 @@ jobs:
       - name: Unit Test
         run: dotnet test ./TrainTimesTests/TrainTimesTests.csproj --verbosity normal --logger "trx;LogFileName=TTTests.trx"
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          trx_files: "**/src/TrainTimesTests/TestResults/TTTests.trx"
+          trx_files: "./src/TrainTimesTests/TestResults/TTTests.trx"
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
