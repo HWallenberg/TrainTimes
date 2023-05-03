@@ -21,6 +21,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'TrainTimes-SonarQube-Connection'
+    scannerMode: 'MSBuild'
+    projectKey: 'TrainTimes-DevOps_TrainTimes-DevOps_AYfhP5yvksE6V9eoLyrU'
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -38,5 +43,12 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: SonarQubeAnalyze@5
+
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
+
 
 - task: PublishBuildArtifacts@1
