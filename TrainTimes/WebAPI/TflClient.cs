@@ -1,13 +1,14 @@
 ﻿using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Web;
+
 namespace TrainTimes.WebAPI
 {
-    public class TFLClient
+    public class TflClient
     {
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
-        public TFLClient(string TFLBaseURL)
+        public TflClient(string TFLBaseURL)
         {
             _client = new HttpClient();
             _client.BaseAddress = new Uri(TFLBaseURL);
@@ -27,9 +28,9 @@ namespace TrainTimes.WebAPI
                 HttpResponseMessage response = await Client.GetAsync(requestParams);
                 return response.IsSuccessStatusCode;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                throw new Exception(ex.Message);
+                throw new HttpRequestException(ex.Message);
             }
            
         }
@@ -37,7 +38,7 @@ namespace TrainTimes.WebAPI
         public async Task<string> GetStationID(string stationName)
         {
             SearchResult? searchResult = new SearchResult();
-            string stationId = string.Empty;
+            string? stationId = string.Empty;
             try
             {
                 string requestParams = @"Stoppoint/Search/" + stationName + @"?modes=tube";
@@ -45,10 +46,12 @@ namespace TrainTimes.WebAPI
                 searchResult = JsonConvert.DeserializeObject<SearchResult>(response.Content.ReadAsStringAsync().Result);
                 if (searchResult != null)
                 {
-                    
-                    if (searchResult.matches.Count == 1)
+                    if (searchResult.matches != null)
                     {
-                        stationId = searchResult.matches[0].id;
+                        if (searchResult.matches.Count == 1)
+                        {
+                            stationId = searchResult.matches[0].id;
+                        }
                     }
                     else
                     {
@@ -64,13 +67,20 @@ namespace TrainTimes.WebAPI
             {
                 throw new JsonSerializationException(ex.Message);
             }
-            return stationId;
+            if (stationId != null)
+            {
+                return stationId;
+            }
+            else
+            {
+                throw new ArgumentNullException("Station Name could not be found" + stationName);
+            }
         }
 
         public async Task<Dictionary<string, List<StationArrival>>> GetStationPlatformArrivals(string stationName)
         {
             List<StationArrival>? arrivals = new List<StationArrival>();
-            Dictionary<string, List<StationArrival>> platformArrivals = new Dictionary<string, List<StationArrival>>();
+            Dictionary<string, List<StationArrival>> platformArrivals;
             string stationID = await GetStationID(stationName);
             try
             {
@@ -80,20 +90,23 @@ namespace TrainTimes.WebAPI
 
                 if (arrivals != null)
                 {
+                    platformArrivals = new Dictionary<string, List<StationArrival>>();
                     foreach (StationArrival _arrival in arrivals)
                     {
-                        if (!platformArrivals.ContainsKey(_arrival.platformName))
+                        if (_arrival.platformName != null)
                         {
-                            List<StationArrival> stationArrivals = new List<StationArrival>();
-                            stationArrivals = arrivals.Where(a => a.platformName == _arrival.platformName).ToList();
+                            if (!platformArrivals.ContainsKey(_arrival.platformName))
+                            {
+                                List<StationArrival> stationArrivals = arrivals.Where(a => a.platformName == _arrival.platformName).ToList();
 
-                            platformArrivals.Add(_arrival.platformName, stationArrivals);
-                        }
-                        else
-                        {
-                            List<StationArrival> stationArrivals = platformArrivals[_arrival.platformName];
-                            stationArrivals.Add(_arrival);
-                            platformArrivals[_arrival.platformName] = stationArrivals;
+                                platformArrivals.Add(_arrival.platformName, stationArrivals);
+                            }
+                            else
+                            {
+                                List<StationArrival> stationArrivals = platformArrivals[_arrival.platformName];
+                                stationArrivals.Add(_arrival);
+                                platformArrivals[_arrival.platformName] = stationArrivals;
+                            }
                         }
                     }
                 }
