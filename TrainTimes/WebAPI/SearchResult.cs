@@ -9,7 +9,7 @@ namespace TrainTimes.WebAPI
         public string? topMostParentId { get; set; }
         public List<string>? modes { get; set; }
         public string? zone { get; set; }
-        public string? id { get; set; }
+        public string? gid { get; set; }
         public string? name { get; set; }
         public double? lat { get; set; }
         public double? lon { get; set; }
