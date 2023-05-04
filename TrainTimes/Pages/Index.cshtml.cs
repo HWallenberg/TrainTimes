@@ -8,12 +8,22 @@ namespace TrainTimes.Pages
 {
     public class IndexModel : PageModel
     {
-        public Dictionary<string, List<StationArrival>> allPlatformArrivals { get; set; }
-        public List<string> platformNames { get; set; }
-        public string stationName { get; set; }
+        public Dictionary<string, List<StationArrival>>? allPlatformArrivals { get; set; }
+        public List<string>? platformNames { get; set; }
+        public string? stationName { get; set; }
         private StationArrivals _allArrivals { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
+
+        //HW added read property as per SonarQube Issue L16
+
+        public ILogger<IndexModel> Logger
+        {
+            get
+            {
+                return _logger;
+            }
+        }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
