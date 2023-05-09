@@ -24,8 +24,7 @@
                     foreach (var arrival in Model.allPlatformArrivals[platformName].Take(8).ToList())
                     {
                         <div>
-                            <span>@{ arrival.timeToStation / 60} seconds haha</span>
-
+                            <span>@arrival.timeToStation</span>
                             <span>@arrival.lineName</span>
                             <span>@arrival.towards</span>
                         </div>
