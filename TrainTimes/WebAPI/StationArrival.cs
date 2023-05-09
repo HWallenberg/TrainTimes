@@ -40,5 +40,5 @@ namespace TrainTimes.WebAPI
         public DateTime? read { get; set; }
         public DateTime? sent { get; set; }
         public DateTime? received { get; set; }
-    }    
+    }
 }
