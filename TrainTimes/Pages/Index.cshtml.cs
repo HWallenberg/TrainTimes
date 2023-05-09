@@ -34,11 +34,11 @@ namespace TrainTimes.Pages
 
         public async Task OnGet()
         {
-            this.allPlatformArrivals = await _allArrivals.GetPlatformsArrivals("piccadilly");
+            this.allPlatformArrivals = await _allArrivals.GetPlatformsArrivals("oxford");
             this.platformNames = allPlatformArrivals.Keys.ToList();
             this.stationName = allPlatformArrivals[platformNames[0]].First().stationName;
         }
 
-        
+
     }
 }
