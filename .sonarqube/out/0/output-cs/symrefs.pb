@@ -7,7 +7,19 @@ S/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Logic/Platfor
 
  
 
-% -Á
+% -Ñ
+W/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Pages/Index.cshtml.cs(
+		 ! + !" ,(
+9 L%% $&&! 4'' 2
+ *&& ''3 @
+ "'' 
+  , %%- 9
+- 4  
+
+# )
+. 4 
+
+## Á
 Z/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Logic/StationArrivals.cs
 
 		  
@@ -28,19 +40,7 @@ W/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Pages/Error.c
 # )
 . 4 
 
-!! Ñ
-W/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Pages/Index.cshtml.cs(
-		 ! + !" ,(
-9 L%% $&&! 4'' 2
- *&& ''3 @
- "'' 
-  , %%- 9
-- 4  
-
-# )
-. 4 
-
-## Ó
+!! Ó
 Y/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimes/Pages/Privacy.cshtml.cs(
  ! -
 
