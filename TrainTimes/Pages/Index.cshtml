@@ -21,7 +21,7 @@
                 <h4>@platformName</h4>
                 @if (Model.allPlatformArrivals != null)
                 {
-                    foreach (var arrival in Model.allPlatformArrivals[platformName].Take(8).ToList())
+                    foreach (var arrival in Model.allPlatformArrivals[platformName].Take(8).OrderBy(a => a.expectedArrival).ToList())
                     {
                         <div>
                             @if (arrival.timeToStation < 1)
