@@ -23,9 +23,9 @@ steps:
 
 - task: SonarQubePrepare@5
   inputs:
-    SonarQube: 'TrainTimes-SonarQube-Connection'
+    SonarQube: 'TrainTimes-SonarQube-Connection-Remote'
     scannerMode: 'MSBuild'
-    projectKey: 'TrainTimes-DevOps_TrainTimes-DevOps_AYfhP5yvksE6V9eoLyrU'
+    projectKey: 'TrainTimes-DevOps_TrainTimes-DevOps_AYgFZ3-UBIRW9cznWANt'
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
