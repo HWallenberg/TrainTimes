@@ -32,7 +32,7 @@ namespace TrainTimes.WebAPI
             {
                 throw new HttpRequestException(ex.Message);
             }
-           
+
         }
 
         public async Task<string> GetStationID(string stationName)
@@ -86,13 +86,15 @@ namespace TrainTimes.WebAPI
             {
                 string requestParams = @"StopPoint/" + stationID + @"/Arrivals?mode=tube";
                 HttpResponseMessage response = await Client.GetAsync(requestParams);
-                arrivals = JsonConvert.DeserializeObject<List<StationArrival>>(response.Content.ReadAsStringAsync().Result) ;
+                arrivals = JsonConvert.DeserializeObject<List<StationArrival>>(response.Content.ReadAsStringAsync().Result);
 
                 if (arrivals != null)
                 {
                     platformArrivals = new Dictionary<string, List<StationArrival>>();
                     foreach (StationArrival _arrival in arrivals)
                     {
+                        _arrival.timeToStation /= 60;
+
                         if (_arrival.platformName != null)
                         {
                             if (!platformArrivals.ContainsKey(_arrival.platformName))
