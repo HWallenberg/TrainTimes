@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageSource Include="NuGet.org" Version="3.0.0" Source="https://api.nuget.org/v3/index.json" />
   </ItemGroup>
 
   <ItemGroup>
