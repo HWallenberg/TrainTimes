@@ -45,6 +45,7 @@ jobs:
   build2:
     name: SonarQubeAnalysis
     runs-on: windows-latest
+    if: ${{env.DO_SONARQUBE_ANALYSIS}} == 'true'
     steps:
       - uses: actions/checkout@v2
         with:
