@@ -24,3 +24,10 @@ jobs:
       run: docker tag '${{env.DOCKER_IMAGE_NAME}}':latest '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
     - name: Push the Docker image
       run: docker push '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
+      
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'HW-TrainTimes'
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5307F1DA5D774EA9BA0771111EA88739 }}
+        images: '${{secrets.DOCKER_LOGIN}}/${{env.DOCKER_IMAGE_NAME}}:latest'
