@@ -1,0 +1,19 @@
+name: Docker Image Deployment to Azure Web App
+
+on:
+  push:
+    branches: [ "Transform_1" ]
+  pull_request:
+    branches: [ "Transform_1" ]
+env:
+  DOCKER_IMAGE_NAME: 'transform_1/traintimes'
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
