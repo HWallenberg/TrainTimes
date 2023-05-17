@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "Transform_1" ]
 env:
-  DOCKER_IMAGE_NAME: 'transform_1/traintimes'
+  DOCKER_IMAGE_NAME: 'transform_1_traintimes'
 jobs:
 
   build:
