@@ -4,9 +4,9 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - HW-TrainTimes
 
 on:
-  push:
-    branches:
-      - Transform_1
+  #push:
+  #  branches:
+  #    - Transform_1
   workflow_dispatch:
 
 jobs:
