@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'hw-traintimes'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B848B570BFD34970A24EA0E5DF5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B848B570BFD34970A24EA0E5DF5E09B7 }}
           package: .
