@@ -29,5 +29,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'HW-TrainTimes'
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5307F1DA5D774EA9BA0771111EA88739 }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B848B570BFD34970A24EA0E5DF5E09B7 }}
         images: '${{secrets.DOCKER_LOGIN}}/${{env.DOCKER_IMAGE_NAME}}:latest'
