@@ -24,6 +24,9 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
+
+      - name: Run Tests
+        run: dotnet test --no-build --verbosity normal ./TrainTimesTests/bin/Release/net7.0/TrainTimesTests.dll
       
       - name: Publish ASP.NET Core app
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
