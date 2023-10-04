@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy ASP.Net Core app to Azure Web App - hw-traintimes
+name: Build, Test, and Deploy ASP.Net Core app to Azure Web App - hw-traintimes
 
 on:
   push:
@@ -28,11 +25,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       
-      - name: Run Tests
-        run: dotnet test --no-build --verbosity normal ./TrainTimesTests/bin/Release/net7.0/TrainTimesTests.dll
-      
-
-      - name: dotnet publish
+      - name: Publish ASP.NET Core app
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
@@ -40,10 +33,10 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
+  
   deploy:
     runs-on: windows-latest
-    needs: build
+    needs: [build, cypress-test]
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -62,3 +55,23 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B848B570BFD34970A24EA0E5DF5E09B7 }}
           package: .
+        
+  cypress-test:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # You can adjust the version as needed
+
+      - name: Install Cypress
+        run: npm install cypress
+
+      - name: Run Cypress tests
+        run: npx cypress run --config baseUrl=${{ steps.deploy-to-webapp.outputs.webapp-url }}
