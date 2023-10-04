@@ -2,7 +2,7 @@ name: Docker Image Deployment to Azure Web App
 
 on:
   push:
-    #branches: [ "Transform_1" ]
+    branches: [ "Transform_1" ]
   pull_request:
     branches: [ "Transform_1" ]
 env:
@@ -15,6 +15,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+  
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.x'
+        include-prerelease: true
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Run Tests
+      run: dotnet test --no-build --verbosity normal ./TrainTimesTests/bin/Release/net7.0/TrainTimesTests.dll
+   
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
       
