@@ -2,7 +2,7 @@ name: Docker Image Deployment to Azure Web App
 
 on:
   push:
-    branches: [ "Transform_1" ]
+    #branches: [ "Transform_1" ]
   pull_request:
     branches: [ "Transform_1" ]
 env:
