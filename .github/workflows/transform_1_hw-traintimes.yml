@@ -30,6 +30,10 @@ jobs:
       
       - name: Publish ASP.NET Core app
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      
+      - name: Copy Cypress Configuration
+        run: |
+          cp cypress.config.js ${{env.DOTNET_ROOT}}/myapp/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
