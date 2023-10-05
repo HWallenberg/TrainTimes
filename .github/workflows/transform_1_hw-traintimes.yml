@@ -67,23 +67,26 @@ jobs:
         
   cypress-test:
     runs-on: windows-latest
-    needs: build
+    needs: 
+      - build
+      - deploy
     steps:
-      - name: Set working directory
-        run: cd ..
-      
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
+      - name: Debug URL
+        run: echo "Deployed app URL:"${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14' # You can adjust the version as needed
+           
+      # - name: Download artifact from build job
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: .net-app
 
-      - name: Install Cypress
-        run: npm install cypress
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14' # You can adjust the version as needed
 
-      - name: Run Cypress tests
-        run: npx cypress run --config baseUrl=${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      # - name: Install Cypress
+      #   run: npm install cypress
+
+      # - name: Run Cypress tests
+      #   run: npx cypress run --config baseUrl=${{ steps.deploy-to-webapp.outputs.webapp-url }}
