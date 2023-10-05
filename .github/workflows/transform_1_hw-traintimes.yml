@@ -34,6 +34,8 @@ jobs:
       - name: Copy Cypress Configuration
         run: |
           cp cypress.config.js ${{env.DOTNET_ROOT}}/myapp/
+          cp todo.cy.js ${{env.DOTNET_ROOT}}/myapp/
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
