@@ -39,7 +39,7 @@ jobs:
   
   deploy:
     runs-on: windows-latest
-    needs: [build, cypress-test]
+    needs: [build]
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -63,6 +63,9 @@ jobs:
     runs-on: windows-latest
     needs: build
     steps:
+      - name: Set working directory
+        run: cd TrainTimes
+      
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
