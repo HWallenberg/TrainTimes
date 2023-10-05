@@ -86,8 +86,5 @@ jobs:
       - name: Install Cypress
         run: npm install cypress
       
-      - name: Set Base URL
-        run: echo "BASE_URL=https://hw-traintimes.azurewebsites.net" >> $GITHUB_ENV
-      
       - name: Run Cypress tests
         run: npx cypress run --config baseUrl=https://hw-traintimes.azurewebsites.net

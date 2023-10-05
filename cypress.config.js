@@ -1,6 +1,6 @@
-const { defineConfig } = require("cypress");
-
-module.exports = defineConfig({
+// cypress.config.js
+module.exports = {
+  baseUrl: "https://hw-traintimes.azurewebsites.net",
   e2e: {
     supportFile: "e2e.js", 
     setupNodeEvents(on, config) {
@@ -9,8 +9,5 @@ module.exports = defineConfig({
   },
   component: {
     specPattern: "...", // Configuration for component tests, if needed
-  },
-  env: {
-    BASE_URL: Cypress.env('BASE_URL')
   }
-});
+};

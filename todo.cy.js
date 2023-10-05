@@ -19,8 +19,8 @@ describe('example to-do app', () => {
     // we include it in our beforeEach function so that it runs before each test
     //cy.visit('https://example.cypress.io/todo')
     //cy.visit('http://localhost:5287/')
-    // Get the baseUrl from Cypress environment variables
-    const baseUrl = Cypress.env('BASE_URL');
+    // Get the baseUrl from Cypress config 
+    const baseUrl = Cypress.config('baseUrl');
 
     // Visit the base URL
     cy.visit(baseUrl);
