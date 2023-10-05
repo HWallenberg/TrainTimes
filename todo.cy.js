@@ -23,7 +23,12 @@ describe('example to-do app', () => {
     const baseUrl = Cypress.config('baseUrl')
 
     // Visit the base URL
-    cy.visit(baseUrl);
+    cy.visit(baseUrl, {
+      headers: {
+          'accept': 'application/json, text/plain, */*',
+          'user-agent': 'axios/0.27.2'
+      }
+  });
   })
 
   it('checks for the word platform in all platform cards', () => {
