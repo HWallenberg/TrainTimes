@@ -1,12 +1,13 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-
-  supportFile: "e2e.js",
-  
   e2e: {
+    supportFile: "e2e.js", 
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+  },
+  component: {
+    specPattern: "...", // Configuration for component tests, if needed
   },
 });
