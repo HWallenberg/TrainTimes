@@ -31,10 +31,10 @@ jobs:
       - name: Publish ASP.NET Core app
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       
-      - name: Copy Cypress Configuration
+      - name: Copy Cypress Files
         run: |
           cp cypress.config.js ${{env.DOTNET_ROOT}}/myapp/
-          cp todo.cy.js ${{env.DOTNET_ROOT}}/myapp/
+          cp todo.cy.js ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
           cp e2e.js ${{env.DOTNET_ROOT}}/myapp/
 
 
