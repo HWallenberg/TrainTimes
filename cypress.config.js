@@ -10,4 +10,7 @@ module.exports = defineConfig({
   component: {
     specPattern: "...", // Configuration for component tests, if needed
   },
+  env: {
+    BASE_URL: Cypress.env('BASE_URL')
+  }
 });
