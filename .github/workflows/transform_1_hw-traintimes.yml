@@ -71,22 +71,18 @@ jobs:
       - build
       - deploy
     steps:
-      - name: Debug URL
-        run: echo "Deployed app URL:"${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
 
-           
-      # - name: Download artifact from build job
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: .net-app
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # You can adjust the version as needed
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '14' # You can adjust the version as needed
+      - name: Install Cypress
+        run: npm install cypress
 
-      # - name: Install Cypress
-      #   run: npm install cypress
-
-      # - name: Run Cypress tests
-      #   run: npx cypress run --config baseUrl=${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      - name: Run Cypress tests
+        run: npx cypress run --config baseUrl=https://hw-traintimes.azurewebsites.net
