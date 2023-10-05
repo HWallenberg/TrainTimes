@@ -20,7 +20,7 @@ describe('example to-do app', () => {
     //cy.visit('https://example.cypress.io/todo')
     //cy.visit('http://localhost:5287/')
     // Get the baseUrl from Cypress config 
-    const baseUrl = Cypress.config('e2e.baseUrl');
+    const baseUrl = Cypress.config().baseUrl
 
     // Visit the base URL
     cy.visit(baseUrl);
