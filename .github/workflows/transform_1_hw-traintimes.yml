@@ -35,7 +35,7 @@ jobs:
         run: |
           cp cypress.config.js ${{env.DOTNET_ROOT}}/myapp/
           mkdir -p ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
-          cp todo.cy.js ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
+          cp cypress/e2e/todo.cy.js ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
           cp e2e.js ${{env.DOTNET_ROOT}}/myapp/
 
 
