@@ -9,8 +9,6 @@ namespace TrainTimesTests
     [TestClass]
     public class LogicTests
     {
-        // HW Commenting these tests out as they aren't relevant and I'm just trying to run a CI/CD pipeline with SonarQube!
-        /*
         [TestMethod]
         public async Task GetAllPiccadillyArrivals()
         {
