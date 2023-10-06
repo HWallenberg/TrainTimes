@@ -39,7 +39,7 @@ jobs:
           # cp e2e.js ${{env.DOTNET_ROOT}}/myapp/
 
           # mkdir -p ${{env.DOTNET_ROOT}}/myapp/cypress
-          cp -r cypress path/to/destination/ ${{env.DOTNET_ROOT}}/myapp
+          cp -r cypress ${{env.DOTNET_ROOT}}/myapp
 
 
       - name: Upload artifact for deployment job
