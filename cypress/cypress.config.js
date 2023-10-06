@@ -4,7 +4,7 @@ module.exports = {
   e2e: {
     baseUrl: "https://hw-traintimes.azurewebsites.net",
     "chromeWebSecurity": false,
-    supportFile: "e2e/e2e.js", 
+    supportFile: "**/e2e/e2e.js", 
     specPattern: "e2e/*.cy.*",
     setupNodeEvents(on, config) {
       // implement node event listeners here
