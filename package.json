@@ -1,5 +1,0 @@
-{
-    "scripts": {
-    "cypress:open": "cypress open"
-    }
-    }
