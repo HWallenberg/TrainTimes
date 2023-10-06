@@ -12,8 +12,19 @@ namespace TrainTimes.Pages
             _logger = logger;
         }
 
+        //HW added read property as per SonarQube Issue L8
+
+        public ILogger<PrivacyModel> Logger
+        {
+            get
+            {
+                return _logger;
+            }
+        }
+
         public void OnGet()
         {
+            // HW not used as this page is redundant
         }
     }
 }

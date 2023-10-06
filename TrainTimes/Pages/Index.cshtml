@@ -4,65 +4,40 @@
     ViewData["Title"] = @Model.stationName + " Arrivals";
 }
 
-<div class="text-center">
+<div class="page-heading text-center">
     <h1 class="display-4 transformOrange">@Model.stationName Arrivals</h1>
 </div>
 
 <br />
 
-<div class="container">
-<div class="row justify-content-center">
-    <table class="table table-reponsive">
-        <tr class="transformOrange text-center size">
-            @foreach(var platformName in Model.platformNames)
-            {
-                <th class="col-2"><h4>@platformName</h4></th>
-            }
-        </tr>
 
-        <tr>
-            @foreach(var platformName in Model.platformNames)
-            {
-                <td>
-                    @foreach (var arrival in Model.platformsArrivals[platformName].Take(4).ToList())
+
+<div class="platforms-wrapper">
+    @if (Model.platformNames != null)
+    {
+        foreach (var platformName in Model.platformNames)
+        {
+            <div class="platform-card">
+                <h4>@platformName</h4>
+                @if (Model.allPlatformArrivals != null)
+                {
+                    foreach (var arrival in Model.allPlatformArrivals[platformName].OrderBy(a => a.expectedArrival).Take(8).ToList())
                     {
-                        <div class="container bg-light">
-                            <div class="col-auto">
-                                <table class="table table-reponsive">
-                                    <tr>
-                                        <td>
-                                            Next Arrival Time:
-                                        </td>
-                                        <td>
-                                            @arrival.expectedArrival.ToString("HH:mm:ss")
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Line:
-                                        </td>
-                                        <td>
-                                            @arrival.lineName
-                                        </td>
-                                    </tr>
-                           
-                                    <tr>
-                                        <td>
-                                            Heading towards:
-                                        </td>
-                                        <td style="width:65%">
-                                            @arrival.towards
-                                        </td>
-                                    </tr>
-                                </table>
-                    
-                            </div>
+                        <div>
+                            @if (arrival.timeToStation < 1)
+                            {
+                                <span>Due</span>
+                            }
+                            else
+                            {
+                                <span>@(arrival.timeToStation) min</span>
+                            }
+                            <span>@arrival.lineName</span>
+                            <span>@arrival.towards</span>
                         </div>
-                        <br />
                     }
-                </td>
-            }
-        </tr>
-    </table>
-</div>
+                }
+            </div>
+        }
+    }
 </div>

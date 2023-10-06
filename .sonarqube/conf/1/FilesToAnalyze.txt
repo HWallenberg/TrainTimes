@@ -1,0 +1,7 @@
+﻿/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimesTests/LogicTests.cs
+/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimesTests/TFLClientTests.cs
+/Users/Hadleigh.Wallenberg/.nuget/packages/microsoft.net.test.sdk/17.5.0/build/netcoreapp3.1/Microsoft.NET.Test.Sdk.Program.cs
+/Users/Hadleigh.Wallenberg/Documents/GitHub/TrainTimes/TrainTimesTests/.DS_Store
+/Users/Hadleigh.Wallenberg/.nuget/packages/mstest.testadapter/3.0.2/build/net6.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/Hadleigh.Wallenberg/.nuget/packages/mstest.testadapter/3.0.2/build/net6.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/Hadleigh.Wallenberg/.nuget/packages/mstest.testadapter/3.0.2/build/net6.0/Microsoft.TestPlatform.AdapterUtilities.dll

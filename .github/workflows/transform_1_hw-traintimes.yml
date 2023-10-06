@@ -1,0 +1,89 @@
+name: Build, Test, and Deploy ASP.Net Core app to Azure Web App - hw-traintimes
+
+on:
+  push:
+    branches:
+      - Transform_1
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.x'
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run Tests
+        run: dotnet test --no-build --verbosity normal ./TrainTimesTests/bin/Release/net7.0/TrainTimesTests.dll
+      
+      - name: Publish ASP.NET Core app
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      
+      - name: Copy Cypress Files
+        run: |
+          cp -r cypress ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+  
+  deploy:
+    runs-on: windows-latest
+    needs: [build]
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'hw-traintimes'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B848B570BFD34970A24EA0E5DF5E09B7 }}
+          package: .
+        
+  cypress-test:
+    runs-on: windows-latest
+    needs: 
+      - build
+      - deploy
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # You can adjust the version as needed
+
+      - name: Install Cypress
+        run: npm install cypress
+
+      - name: Change working directory to cypress
+        run: cd cypress
+        
+      - name: Run Cypress tests with custom config
+        run: npx cypress run --config-file cypress\cypress.config.js --config baseUrl=https://hw-traintimes.azurewebsites.net
