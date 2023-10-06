@@ -33,14 +33,7 @@ jobs:
       
       - name: Copy Cypress Files
         run: |
-          # cp cypress.config.js ${{env.DOTNET_ROOT}}/myapp/
-          # mkdir -p ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
-          # cp cypress/e2e/todo.cy.js ${{env.DOTNET_ROOT}}/myapp/cypress/e2e
-          # cp e2e.js ${{env.DOTNET_ROOT}}/myapp/
-
-          # mkdir -p ${{env.DOTNET_ROOT}}/myapp/cypress
           cp -r cypress ${{env.DOTNET_ROOT}}/myapp
-
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -89,8 +82,8 @@ jobs:
       - name: Install Cypress
         run: npm install cypress
 
-      - name: Change working directory to cypress
-        run: cd cypress
-      
-      - name: Run Cypress tests
-        run: npx cypress run --config baseUrl=https://hw-traintimes.azurewebsites.net
+      - name: Change working directory to traintimes/traintimes/cypress
+        run: cd traintimes/traintimes/cypress
+        
+      - name: Run Cypress tests with custom config
+        run: npx cypress run --config-file cypress.config.js --config baseUrl=https://hw-traintimes.azurewebsites.net
