@@ -86,4 +86,4 @@ jobs:
         run: cd cypress
         
       - name: Run Cypress tests with custom config
-        run: npx cypress run --config-file cypress.config.js --config baseUrl=https://hw-traintimes.azurewebsites.net
+        run: npx cypress run --config-file cypress\cypress.config.js --config baseUrl=https://hw-traintimes.azurewebsites.net
